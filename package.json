@@ -8,6 +8,8 @@
   },
   "keywords": [],
   "author": "Ruslan Kuzyshyn",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@nx/react": "^18.3.4"
+  }
 }
-
