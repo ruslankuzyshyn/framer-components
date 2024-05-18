@@ -10,6 +10,6 @@
   "author": "Ruslan Kuzyshyn",
   "license": "ISC",
   "dependencies": {
-    "@nx/react": "^18.3.4"
+    "@nx/react": "^18.3.5"
   }
 }
