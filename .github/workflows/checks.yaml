@@ -1,0 +1,24 @@
+name: Checks
+
+on: push
+
+jobs:
+  all-checks:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        name: 'Setup repo'
+      - name: Build
+        run: |
+          pnpm nx run-many -t build
+      - name: Lint
+        run: |
+          pnpm nx run-many -t lint
+      - name: Test
+        run: |
+          pnpm nx run-many -t test
+      - name: Format
+        run: |
+          pnpm prettier:check
