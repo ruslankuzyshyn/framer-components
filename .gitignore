@@ -1,5 +1,13 @@
-
 .nx/installation
 .nx/cache
 .idea
 node_modules
+
+# packages
+packages/*/node_modules
+
+# storybook
+storybook-static
+
+# tests
+coverage
