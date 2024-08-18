@@ -1,0 +1,64 @@
+{
+  "name": "anagram-text",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "root": "packages/anagram-text",
+  "sourceRoot": "packages/anagram-text/src",
+  "files": ["packages/anagram-text/src", "packages/anagram-text/dist"],
+  "namedInputs": {
+    "noMarkdown": ["!{projectRoot}/**/*.md"],
+    "noBuildArtifact": ["!{projectRoot}/build"],
+    "noStories": ["!{projectRoot}/**/*.stories.tsx", "!{projectRoot}/.storybook/**"],
+    "noTests": ["!{projectRoot}/**/*.test.ts", "!{projectRoot}/**/*.test.tsx"]
+  },
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "inputs": [
+        "noMarkdown",
+        "noBuildArtifact",
+        "noStories",
+        "noTests",
+        "!{projectRoot}/**/*.test.tsx"
+      ],
+      "cache": true,
+      "options": {
+        "main": "packages/anagram-text/src/index.ts",
+        "outputPath": "packages/anagram-text/build",
+        "tsConfig": "packages/anagram-text/tsconfig.json",
+        "assets": ["packages/anagram-text/*.md"],
+        "clean": true
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "inputs": ["noBuildArtifact"],
+      "cache": true,
+      "options": {
+        "lintFilePatterns": [
+          "packages/anagram-text/src/**/*.ts",
+          "packages/anagram-text/src/**/*.tsx"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "inputs": ["noMarkdown", "noBuildArtifact", "noStories"],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "cache": true,
+      "options": {
+        "jestConfig": "packages/anagram-text/jest.config.ts",
+        "passWithNoTests": true,
+        "codeCoverage": true,
+        "coverageDirectory": "coverage/packages/anagram-text"
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  }
+}
